@@ -19,4 +19,21 @@ public class ProductRepository {
     public Iterator<Product> findAll() {
         return productData.iterator();
     }
+
+    public Product findById(String productId) {
+        return productData.stream()
+                .filter(p -> p.getProductId().equals(productId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Product update(Product updatedProduct) {
+        Product existing = findById(updatedProduct.getProductId());
+        if (existing != null) {
+            int index = productData.indexOf(existing);
+            productData.set(index, updatedProduct);
+            return updatedProduct;
+        }
+        return null; // or throw an exception if you prefer
+    }
 }
