@@ -33,5 +33,24 @@ public class ProductServiceImpl implements ProductService {
     public void deleteById(String productId) {
         productRepository.deleteById(productId);
     }
+    
+    @Override
+    public Product findById(String productId) {
+        return productRepository.findById(productId);
+    }
 
+    @Override
+    public Product update(String productId, Product updatedProduct) {
+        Product existing = productRepository.findById(productId);
+
+        if (existing == null) {
+            throw new RuntimeException("Product not found");
+        }
+
+        existing.setProductName(updatedProduct.getProductName());
+        existing.setProductQuantity(updatedProduct.getProductQuantity());
+
+        productRepository.update(existing);
+        return existing;
+    }
 }
