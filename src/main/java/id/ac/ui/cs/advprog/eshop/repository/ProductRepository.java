@@ -19,7 +19,10 @@ public class ProductRepository {
     public Iterator<Product> findAll() {
         return productData.iterator();
     }
-
+  
+    public void deleteById(String productId) {
+        productData.removeIf(product -> product.getProductId().equals(productId));
+      
     public Product findById(String productId) {
         return productData.stream()
                 .filter(p -> p.getProductId().equals(productId))
@@ -34,6 +37,6 @@ public class ProductRepository {
             productData.set(index, updatedProduct);
             return updatedProduct;
         }
-        return null; // or throw an exception if you prefer
+        return null;
     }
 }

@@ -14,5 +14,4 @@ public class Product {
         // Automatically generate a UUID when a new product is created
         this.productId = UUID.randomUUID().toString();
     }
-
 }

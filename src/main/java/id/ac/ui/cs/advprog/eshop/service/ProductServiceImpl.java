@@ -30,24 +30,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void deleteById(String productId) {
+        productRepository.deleteById(productId);
+    }
+    
+    @Override
     public Product findById(String productId) {
         return productRepository.findById(productId);
     }
 
     @Override
     public Product update(String productId, Product updatedProduct) {
-        // Retrieve the existing product (assumes productRepository has a method to find by ID).
         Product existing = productRepository.findById(productId);
 
         if (existing == null) {
             throw new RuntimeException("Product not found");
         }
 
-        // Update relevant fields
         existing.setProductName(updatedProduct.getProductName());
         existing.setProductQuantity(updatedProduct.getProductQuantity());
 
-        // Save or update the product (adjust method name as needed for your repository).
         productRepository.update(existing);
         return existing;
     }
