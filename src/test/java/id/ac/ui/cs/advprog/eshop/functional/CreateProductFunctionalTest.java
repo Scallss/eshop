@@ -33,7 +33,7 @@ class CreateProductFunctionalTest {
     }
 
     @Test
-    void createProduct_andVerifyInList(ChromeDriver driver) throws Exception {
+    void createProduct_andVerifyInList(ChromeDriver driver) {
         driver.get(baseUrl + "/create");
 
         WebElement nameInput = driver.findElement(By.id("nameInput"));
