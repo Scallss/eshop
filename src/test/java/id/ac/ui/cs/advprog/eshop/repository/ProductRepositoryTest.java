@@ -16,9 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductRepositoryTest {
     @InjectMocks
     ProductRepository productRepository;
-    @BeforeEach
-    void setUp() {
-    }
     @Test
     void testCreateAndFind() {
         Product product = new Product();
