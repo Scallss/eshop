@@ -26,7 +26,7 @@
       <td th:text="${product.productName}"></td>
       <td th:text="${product.productQuantity}"></td>
       <td>
-        <a th:href="@{/product/delete/{id}(id=${product.productId})}" class="btn btn-danger btn-sm">Delete</a>g
+        <a th:href="@{/product/delete/{id}(id=${product.productId})}" class="btn btn-danger btn-sm">Delete</a>
       </td>
       <td>
         <a th:href="@{/product/edit/{productId}(productId=${product.productId})}"
