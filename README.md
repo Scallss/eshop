@@ -41,3 +41,68 @@ Isu Code Quality yang diperbaiki:
 ### Reflection 2
 Saya rasa implementasi sekarang sudah cukup memenuhi CI/CD pipeline. Sudah terdapat proses build, test, dan deploy pada pipeline/workflow project ini. Bahkan juga sudah menambahkan code scanning tools dari scorecard, dan sonarcloud. Selain itu, sudah terdapat proses deployment pada koyeb yang dilakukann continuous deployment yang menghubungkan koyeb dengan github repo saya. Sehingga setiap terdapat perubahan pada main branch, akan langsung terdeploy ke koyeb bahkan tanpa perlu menulis workflow baru. Oleh karena itu, saya rasa implementasi CI/CD sudah cukup baik, setidaknya untuk project pribadi ini. Mungkin saja untuk project yang lebih besar, perlu ditambahkan beberapa proses lain seperti security scanning, performance testing, dll.
 </details>
+
+<details>
+    <summary><h2>Module 3</h2></summary>
+
+### Reflection 1 (Prinsip SOLID yang Diterapkan)
+
+Prinsip-prinsip yang saya terapkan dalam proyek saya meliputi Single Responsibility Principle (SRP), Open-Closed Principle (OCP), Liskov Substitution Principle (LSP), Interface Segregation Principle (ISP), dan Dependency Inversion Principle (DIP).
+
+Dengan menerapkan SRP, saya memastikan setiap kelas memiliki satu tanggung jawab spesifik tanpa mencampur tugasnya dengan kelas lain. Contohnya, ProductController hanya menangani pemetaan untuk Product, sedangkan CarController khusus untuk Car.
+
+Dalam OCP, saya merancang kelas dan fungsi agar dapat diperluas tanpa perlu mengubah kode yang sudah ada. Misalnya, saya menggunakan interface ProductService sebagai dasar untuk ProductServiceImpl, yang mengharuskan implementasi metode tertentu tetapi tetap memungkinkan penambahan metode tambahan sebagai pendukung.
+
+Untuk LSP, saya memastikan bahwa penggunaan superclass tidak merusak kode yang ada. Sebagai contoh, saya mengganti tipe CarServiceImpl menjadi CarService, sehingga kode tetap berjalan dengan baik tanpa mengalami kendala.
+
+Dengan ISP, saya membagi antarmuka menjadi bagian-bagian yang hanya berisi fungsionalitas yang benar-benar diperlukan, seperti pembuatan, penyimpanan, pengeditan, penghapusan, dan pencarian objek untuk Product dan Car.
+
+Terakhir, melalui DIP, saya menghindari instansiasi langsung objek dalam kelas yang membutuhkannya. Sebagai gantinya, saya menggunakan dependency injection melalui anotasi @Autowired milik Spring, misalnya saat Service membutuhkan Repository.
+
+
+### Reflection 2 (Keuntungan Menerapkan Prinsip SOLID)
+
+Dengan menerapkan prinsip SOLID, kita dapat meningkatkan manageability kode, membuatnya lebih mudah diuji, dibaca, dan diperluas tanpa merusak bagian lain dari kode.
+
+- **Kemudahan Pengujian**
+
+  Ketika sebuah metode terlalu panjang dan melakukan banyak hal sekaligus, mengidentifikasi sumber kesalahan menjadi sulit. Dengan memecah metode menjadi unit-unit kecil yang lebih spesifik, kita bisa menguji setiap bagian secara terpisah, sehingga lebih mudah menemukan dan memperbaiki bug. Selain itu, jika sebuah kelas memiliki ketergantungan tinggi pada kelas lain, pengujian menjadi sulit karena kita harus mempertimbangkan hubungan antar kelas dan apakah kita perlu melakukan mocking terhadap dependency tersebut.
+
+
+- **Peningkatan Readability**
+
+  Kode yang lebih modular juga lebih mudah dibaca dan dipahami. Jika sebuah metode terlalu panjang dan kompleks, orang lain yang membaca kode akan kesulitan memahami cara kerjanya. Namun, dengan membaginya menjadi metode yang lebih kecil, tujuan dan alur kerja kode menjadi lebih jelas. Kode yang lebih pendek lebih mudah dipahami dibandingkan kode panjang dan rumit.
+
+
+- **Kemudahan Menambah Fitur**
+
+  Prinsip Open-Closed Principle (OCP) memastikan bahwa kode dapat diperluas tanpa harus mengubah bagian yang sudah ada. Ketika kita ingin menambahkan fitur baru, kita cukup menambahkan kode baru tanpa mengubah fitur yang sudah berjalan. Misalnya, jika saya ingin menambahkan mapping untuk Product, saya hanya perlu mengedit ProductController.java, karena kelas ini bertanggung jawab atas pemetaan Product.
+
+
+- **Mengurangi Risiko Kerusakan Kode**
+
+  Prinsip Dependency Inversion Principle (DIP) membantu memisahkan ketergantungan antara komponen dalam kode. Dengan menggunakan interface daripada concrete implementation, kita dapat mengganti implementasi tanpa mengganggu bagian lain dari kode. Sebagai contoh, jika saya ingin mengubah implementasi method create untuk Car, saya tidak perlu mengubah metode create pada tingkat service atau controller. Cukup dengan memperbarui CarRepository, selama return type tetap sama, perubahan ini tidak akan merusak codebase.
+
+
+Dengan menerapkan prinsip SOLID, kita tidak hanya meningkatkan kualitas kode, tetapi juga mempermudah pemeliharaan, pengujian, dan pengembangan proyek dalam jangka panjang.
+
+
+### Reflection 3 (Kelemahan Kode Tanpa Prinsip SOLID)
+
+- **Kode Sulit Dibaca dan Dikelola**
+
+  Jika kode tidak dipisahkan dengan baik sesuai tanggung jawabnya (Single Responsibility Principle - SRP), maka proyek dapat menjadi berantakan. Misalnya, jika ada kelas yang bertindak sebagai controller dan service sekaligus, struktur kode menjadi tidak jelas dan sulit dipahami. Metode yang terlalu panjang dan melakukan banyak hal juga menyulitkan pengembang baru dalam memahami alur kerja kode.
+
+
+- **Kesulitan dalam Menambah Fitur**
+
+  Jika kode tidak mengikuti Open-Closed Principle (OCP), setiap kali kita ingin menambahkan fitur baru, kita harus melakukan banyak perubahan pada kode lama. Hal ini meningkatkan risiko merusak bagian lain dari sistem. Misalnya, jika saya ingin mengubah implementasi metode delete untuk Product, saya harus memodifikasi ProductRepository. Namun, tanpa struktur yang baik, saya tidak bisa memastikan bahwa perubahan ini tidak akan berdampak negatif pada bagian lain dari kode. Hal ini dapat menyebabkan bug yang sulit dilacak, seperti produk yang tidak terhapus meskipun pengguna melakukan permintaan penghapusan.
+
+
+- **Testing menjadi sulit**
+
+  Kode yang memiliki dependensi tinggi pada bagian lain sulit untuk diuji karena kita perlu menyesuaikan banyak variabel atau melakukan mocking sebelum bisa menjalankan unit test. Jika sebuah metode terlalu panjang dan memiliki banyak ketergantungan, kita harus mengeluarkan lebih banyak usaha untuk mengisolasi bagian yang ingin diuji, yang pada akhirnya memperlambat proses pengembangan.
+
+
+Dengan kata lain, tanpa prinsip SOLID, proses development akan menjadi lebih lambat, kode lebih sulit dipahami, testing lebih rumit, dan setiap perubahan bisa menyebabkan masalah yang tidak terduga.
+</details>

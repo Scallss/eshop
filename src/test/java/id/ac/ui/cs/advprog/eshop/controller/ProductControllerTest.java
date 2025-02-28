@@ -34,12 +34,6 @@ class ProductControllerTest {
     }
 
     @Test
-    void testHomePage() {
-        String viewName = productController.homePage(model);
-        assertEquals("base", viewName);
-    }
-
-    @Test
     void testCreateProductPage() {
         String viewName = productController.createProductPage(model);
         assertEquals("CreateProduct", viewName);
