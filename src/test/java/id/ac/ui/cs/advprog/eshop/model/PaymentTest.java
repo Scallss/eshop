@@ -2,6 +2,7 @@ package id.ac.ui.cs.advprog.eshop.model;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,7 @@ class PaymentTest {
         paymentData.put("voucher", "ESHOP1234ABC5678");
 
         Payment payment = new Payment("paymentId", "voucher", paymentData, order);
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
@@ -28,7 +29,7 @@ class PaymentTest {
         paymentData.put("voucher", "INVALIDVOUCHER");
 
         Payment payment = new Payment("paymentId", "voucher", paymentData, order);
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -37,7 +38,7 @@ class PaymentTest {
         paymentData.put("bankName", "referenceCode");
 
         Payment payment = new Payment("paymentId", "bankTransfer", paymentData, order);
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
@@ -46,7 +47,7 @@ class PaymentTest {
         paymentData.put("bankName", "");
 
         Payment payment = new Payment("paymentId", "bankTransfer", paymentData, order);
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
