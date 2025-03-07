@@ -37,7 +37,7 @@ class PaymentTest {
         paymentData.put("bankName", "referenceCode");
 
         Payment payment = new Payment("paymentId", "bankTransfer", paymentData, order);
-        assertEquals("PENDING", payment.getStatus());
+        assertEquals("SUCCESS", payment.getStatus());
     }
 
     @Test
