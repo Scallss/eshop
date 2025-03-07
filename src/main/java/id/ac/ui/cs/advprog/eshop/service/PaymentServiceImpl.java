@@ -1,5 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.service;
 
+import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import id.ac.ui.cs.advprog.eshop.repository.PaymentRepository;
@@ -26,17 +28,17 @@ public class PaymentServiceImpl implements PaymentService {
         if ("voucher".equals(method)) {
             String voucherCode = paymentData.get("voucherCode");
             if (voucherCode != null && voucherCode.length() == 16 && voucherCode.startsWith("ESHOP") && voucherCode.chars().filter(Character::isDigit).count() == 8) {
-                this.setStatus(payment, "SUCCESS");
+                this.setStatus(payment, PaymentStatus.SUCCESS.getValue());
             } else {
-                this.setStatus(payment, "REJECTED");
+                this.setStatus(payment, PaymentStatus.REJECTED.getValue());
             }
         } else if ("bankTransfer".equals(method)) {
             String bankName = paymentData.get("bankName");
             String referenceCode = paymentData.get("referenceCode");
             if (bankName == null || bankName.isEmpty() || referenceCode == null || referenceCode.isEmpty()) {
-                this.setStatus(payment, "REJECTED");
+                this.setStatus(payment, PaymentStatus.REJECTED.getValue());
             } else {
-                this.setStatus(payment, "SUCCESS");
+                this.setStatus(payment, PaymentStatus.SUCCESS.getValue());
             }
         } else {
             throw new IllegalArgumentException("Invalid payment method");
@@ -49,10 +51,10 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Payment setStatus(Payment payment, String status) {
         payment.setStatus(status);
-        if ("SUCCESS".equals(status)) {
-            orderService.updateStatus(payment.getOrder().getId(), "SUCCESS");
-        } else if ("REJECTED".equals(status)) {
-            orderService.updateStatus(payment.getOrder().getId(), "FAILED");
+        if (PaymentStatus.SUCCESS.getValue().equals(status)) {
+            orderService.updateStatus(payment.getOrder().getId(), OrderStatus.SUCCESS.getValue());
+        } else if (PaymentStatus.REJECTED.getValue().equals(status)) {
+            orderService.updateStatus(payment.getOrder().getId(), OrderStatus.FAILED.getValue());
         }
         return payment;
     }
