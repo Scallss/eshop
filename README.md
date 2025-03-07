@@ -106,3 +106,21 @@ Dengan menerapkan prinsip SOLID, kita tidak hanya meningkatkan kualitas kode, te
 
 Dengan kata lain, tanpa prinsip SOLID, proses development akan menjadi lebih lambat, kode lebih sulit dipahami, testing lebih rumit, dan setiap perubahan bisa menyebabkan masalah yang tidak terduga.
 </details>
+
+<details>
+    <summary><h2>Module 4</h2></summary>
+
+### Reflection 1 (Kegunaan TDD Flow)
+
+Saya merasa bahwa alur Test-Driven Development (TDD) cukup membantu dalam mendeteksi bug lebih awal dan memastikan bahwa kode yang dibuat telah diuji dengan baik sebelum diimplementasikan lebih lanjut. 
+
+Dengan pendekatan ini, saya bisa menghindari debugging di tahap akhir karena bug sudah terdeteksi sejak awal. Namun, di sisi lain, saya merasa bahwa TDD cukup membatasi karena memakan waktu cukup lama dalam memikirkan dan menyusun test yang benar, serta menentukan metode yang tepat untuk diuji. Untuk ke depannya, saya berencana untuk menambahkan pengujian yang menguji interaksi antar fitur, seperti pengujian terhadap operasi pembuatan, pembaruan, dan penghapusan dalam jumlah besar, agar lebih menjamin bahwa fitur tidak hanya berfungsi secara individual tetapi juga dalam skenario yang lebih kompleks.
+
+### Reflection 2 (Apakah sudah mengikut FIRST principle?)
+
+Menurut saya, sebagian besar pengujian yang telah saya buat sudah mengikuti prinsip F.I.R.S.T. (Fast, Independent, Repeatable, Self-validating, Timely). Pengujian yang saya buat sudah mencakup berbagai kemungkinan, baik skenario sukses maupun kegagalan, yang memastikan bahwa kode bekerja sesuai harapan. 
+
+Setiap unit test juga dibuat secara terisolasi sehingga tidak mempengaruhi hasil pengujian lainnya. Selain itu, pengujian berjalan dalam waktu yang relatif cepat dan memiliki asersi yang jelas untuk memastikan validitas hasilnya. 
+
+Untuk ke depannya, saya berencana untuk lebih memperhatikan cakupan pengujian dan memastikan bahwa setiap aspek sistem diuji dengan lebih menyeluruh, termasuk bagaimana perubahan pada satu fitur dapat mempengaruhi fitur lainnya.
+</details>
